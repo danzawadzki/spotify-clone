@@ -9,13 +9,19 @@
   "dependencies": {
     "@heroicons/react": "^1.0.5",
     "next": "latest",
+    "next-auth": "^4.0.2",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "spotify-web-api-node": "^5.0.2"
   },
   "devDependencies": {
+    "@types/check-types": "^7.3.3",
     "@types/react": "^17.0.37",
+    "@types/spotify-web-api-node": "^5.0.4",
     "autoprefixer": "^10.4.0",
+    "check-types": "^11.1.2",
     "husky": "^7.0.4",
+    "i": "^0.3.7",
     "lint-staged": "^12.1.2",
     "postcss": "^8.4.4",
     "prettier": "2.5.1",
