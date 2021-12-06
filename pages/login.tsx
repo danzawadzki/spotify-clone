@@ -21,7 +21,7 @@ const Login: FunctionComponent<LoginProps> = ({ providers }) => (
       <div key={provider.name}>
         <button
           className="bg-green-500 hover:bg-green-700 transition duration-100 ease-in-out text-white rounded-full py-2 px-6"
-          onClick={() => signIn(provider.id)}
+          onClick={() => signIn(provider.id, { callbackUrl: "/" })}
         >
           Login with {provider.name}
         </button>
