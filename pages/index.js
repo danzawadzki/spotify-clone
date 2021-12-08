@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Sidebar from "../shared/Sidebar/Sidebar";
+import Center from "../shared/Center/Center";
 
 export default function Home() {
   return (
@@ -9,8 +10,9 @@ export default function Home() {
         {/*<link rel="icon" href="/favicon.ico" />*/}
       </Head>
 
-      <main>
+      <main className="flex">
         <Sidebar />
+        <Center />
         {/* Center */}
       </main>
 
