@@ -8,7 +8,7 @@ import {
   RssIcon,
   SearchIcon,
 } from "@heroicons/react/outline";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 const NAV_BUTTONS = [
   { label: "Home", icon: HomeIcon },
@@ -25,6 +25,8 @@ const YOUR_BUTTONS = [
 type SidebarProps = {};
 
 const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
+  const x = useSession();
+
   return (
     <div className="p-5 text-gray-500 text-sm border-r border-gray-900">
       <div className="space-y-4">
