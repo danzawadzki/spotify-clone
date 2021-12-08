@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import {
   HeartIcon,
   HomeIcon,
@@ -9,6 +9,7 @@ import {
   SearchIcon,
 } from "@heroicons/react/outline";
 import { signOut, useSession } from "next-auth/react";
+import useSpotify from "../../hooks/useSpotify";
 
 const NAV_BUTTONS = [
   { label: "Home", icon: HomeIcon },
@@ -25,7 +26,19 @@ const YOUR_BUTTONS = [
 type SidebarProps = {};
 
 const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
-  const x = useSession();
+  const spotifyApi = useSpotify();
+  const { data: session } = useSession();
+  const [playlists, setPlaylists] = useState<
+    SpotifyApi.PlaylistObjectSimplified[]
+  >([]);
+
+  useEffect(() => {
+    if (spotifyApi.getAccessToken()) {
+      spotifyApi
+        .getUserPlaylists()
+        .then((data) => setPlaylists(data.body.items));
+    }
+  }, [session, spotifyApi]);
 
   return (
     <div className="p-5 text-gray-500 text-sm border-r border-gray-900 overflow-y-scroll h-screen scrollbar-hide">
@@ -50,6 +63,11 @@ const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
           </button>
         ))}
         <hr className="border-t-[0.1px] border-gray-900" />
+        {playlists.map((playlist) => (
+          <p key={playlist.id} className="cursor-pointer hover:text-white">
+            {playlist.name}
+          </p>
+        ))}
         <button
           className="flex items-center space-x-2 hover:text-white"
           onClick={() => signOut()}
