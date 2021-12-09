@@ -31,6 +31,7 @@ const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
   const [playlists, setPlaylists] = useState<
     SpotifyApi.PlaylistObjectSimplified[]
   >([]);
+  const [activePlaylistId, setActivePlaylistId] = useState<string | null>(null);
 
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
@@ -64,7 +65,11 @@ const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
         ))}
         <hr className="border-t-[0.1px] border-gray-900" />
         {playlists.map((playlist) => (
-          <p key={playlist.id} className="cursor-pointer hover:text-white">
+          <p
+            key={playlist.id}
+            className="cursor-pointer hover:text-white"
+            onClick={() => setActivePlaylistId(playlist.id)}
+          >
             {playlist.name}
           </p>
         ))}
