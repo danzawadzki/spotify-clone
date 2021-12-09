@@ -1,6 +1,8 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { ChevronDownIcon } from "@heroicons/react/outline";
+import { useRecoilValue } from "recoil";
+import playlistIdState from "../../atoms/playlistAtom";
 
 const colors = [
   "indigo",
@@ -18,10 +20,11 @@ type CenterProps = {};
 const Center: FunctionComponent<CenterProps> = ({}) => {
   const { data: session } = useSession();
   const [color, setColor] = useState(null);
+  const activePlaylistId = useRecoilValue(playlistIdState);
 
   useEffect(() => {
     setColor(colors[Math.floor(Math.random() * colors.length)]);
-  }, []);
+  }, [activePlaylistId]);
 
   return (
     <div className="flex-grow text-white">

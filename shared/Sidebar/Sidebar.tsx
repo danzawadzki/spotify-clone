@@ -9,7 +9,9 @@ import {
   SearchIcon,
 } from "@heroicons/react/outline";
 import { signOut, useSession } from "next-auth/react";
+import { useRecoilState } from "recoil";
 import useSpotify from "../../hooks/useSpotify";
+import playlistIdState from "../../atoms/playlistAtom";
 
 const NAV_BUTTONS = [
   { label: "Home", icon: HomeIcon },
@@ -31,7 +33,8 @@ const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
   const [playlists, setPlaylists] = useState<
     SpotifyApi.PlaylistObjectSimplified[]
   >([]);
-  const [activePlaylistId, setActivePlaylistId] = useState<string | null>(null);
+  const [activePlaylistId, setActivePlaylistId] =
+    useRecoilState(playlistIdState);
 
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
