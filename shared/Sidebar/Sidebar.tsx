@@ -11,7 +11,7 @@ import {
 import { signOut, useSession } from "next-auth/react";
 import { useRecoilState } from "recoil";
 import useSpotify from "../../hooks/useSpotify";
-import playlistIdState from "../../atoms/playlistAtom";
+import { playlistIdState } from "../../atoms/playlistAtom";
 
 const NAV_BUTTONS = [
   { label: "Home", icon: HomeIcon },
@@ -38,9 +38,10 @@ const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
 
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
-      spotifyApi
-        .getUserPlaylists()
-        .then((data) => setPlaylists(data.body.items));
+      spotifyApi.getUserPlaylists().then((data) => {
+        setPlaylists(data.body.items);
+        setActivePlaylistId(data.body.items[0].id);
+      });
     }
   }, [session, spotifyApi]);
 

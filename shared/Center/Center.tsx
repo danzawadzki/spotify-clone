@@ -1,8 +1,9 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { ChevronDownIcon } from "@heroicons/react/outline";
-import { useRecoilValue } from "recoil";
-import playlistIdState from "../../atoms/playlistAtom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import useSpotify from "../../hooks/useSpotify";
+import { activePlaylistState, playlistIdState } from "../../atoms/playlistAtom";
 
 const colors = [
   "indigo",
@@ -19,11 +20,22 @@ type CenterProps = {};
 
 const Center: FunctionComponent<CenterProps> = ({}) => {
   const { data: session } = useSession();
+  const spotifyApi = useSpotify();
   const [color, setColor] = useState(null);
   const activePlaylistId = useRecoilValue(playlistIdState);
+  const [activePlaylist, setActivePlaylist] =
+    useRecoilState(activePlaylistState);
 
   useEffect(() => {
     setColor(colors[Math.floor(Math.random() * colors.length)]);
+  }, [activePlaylistId]);
+
+  useEffect(() => {
+    if (activePlaylistId)
+      spotifyApi
+        .getPlaylist(activePlaylistId)
+        .then((response) => setActivePlaylist(response.body))
+        .catch((e) => console.log("Error: ", e));
   }, [activePlaylistId]);
 
   return (
@@ -42,7 +54,7 @@ const Center: FunctionComponent<CenterProps> = ({}) => {
       <section
         className={`flex items-end space-x-7 bg-gradient-to-b to-black from-${color}-500 h-80`}
       >
-        hello
+        {activePlaylist.name}
         <img src="" alt="" />
       </section>
     </div>
