@@ -2,7 +2,10 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { ChevronDownIcon } from "@heroicons/react/outline";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { activePlaylistState, playlistIdState } from "../../atoms/playlistAtom";
+import {
+  activePlaylistState,
+  playlistIdState,
+} from "../../atoms/playlist.atom";
 import useSpotify from "../../hooks/useSpotify";
 import Songs from "../Songs/Songs";
 

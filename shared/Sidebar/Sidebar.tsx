@@ -11,7 +11,7 @@ import {
 import { signOut, useSession } from "next-auth/react";
 import { useRecoilState } from "recoil";
 import useSpotify from "../../hooks/useSpotify";
-import { playlistIdState } from "../../atoms/playlistAtom";
+import { playlistIdState } from "../../atoms/playlist.atom";
 
 const NAV_BUTTONS = [
   { label: "Home", icon: HomeIcon },

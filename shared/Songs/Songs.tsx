@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 import { useRecoilValue } from "recoil";
-import { activePlaylistState } from "../../atoms/playlistAtom";
+import { activePlaylistState } from "../../atoms/playlist.atom";
 import Song from "./Song";
 
 const Songs: FunctionComponent = () => {
