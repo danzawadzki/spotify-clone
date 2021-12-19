@@ -46,7 +46,7 @@ const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
   }, [session, spotifyApi]);
 
   return (
-    <div className="p-5 text-gray-500 text-sm border-r border-gray-900 overflow-y-scroll h-screen scrollbar-hide">
+    <div className="p-5 text-gray-500 text-xs lg:text-sm border-r border-gray-900 overflow-y-scroll h-screen scrollbar-hide max-w-400 sm:max-w[12rem] lg:max-w[15rem] hidden md:inline-flex">
       <div className="space-y-4">
         {NAV_BUTTONS.map(({ label, icon: Icon }) => (
           <button
