@@ -1,6 +1,6 @@
 import { SessionProvider } from "next-auth/react";
 import { RecoilRoot } from "recoil";
-import "tailwindcss/tailwind.css";
+import "../styles/globals.css";
 
 export default function App({
   Component,
