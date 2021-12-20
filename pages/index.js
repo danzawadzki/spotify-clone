@@ -1,6 +1,7 @@
 import Head from "next/head";
-import Sidebar from "../shared/Sidebar/Sidebar";
 import Center from "../shared/Center/Center";
+import Sidebar from "../shared/Sidebar/Sidebar";
+import Player from "../shared/Player/Player";
 
 export default function Home() {
   return (
@@ -13,10 +14,11 @@ export default function Home() {
       <main className="flex">
         <Sidebar />
         <Center />
-        {/* Center */}
       </main>
 
-      <div>{/* Player */}</div>
+      <div className="sticky bottom-0">
+        <Player />
+      </div>
     </div>
   );
 }

@@ -1,4 +1,7 @@
 import { FunctionComponent } from "react";
+import { useRecoilState } from "recoil";
+import { activeTrackIdState, isPlayingState } from "../../atoms/song.atom";
+import useSpotify from "../../hooks/useSpotify";
 import { msToMins } from "../../lib/time";
 
 type SongProps = {
@@ -7,8 +10,30 @@ type SongProps = {
 };
 
 const Song: FunctionComponent<SongProps> = ({ track, order }) => {
+  const spotifyApi = useSpotify();
+
+  const [activeTrackId, setActiveTrackId] = useRecoilState(activeTrackIdState);
+  const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
+
+  const playSong = () => {
+    setActiveTrackId(track.track.id);
+    setIsPlaying(true);
+
+    spotifyApi.play({
+      uris: [track.track.uri],
+    });
+  };
+
+  const stopSong = () => {
+    setActiveTrackId(null);
+    setIsPlaying(false);
+  };
+
   return (
-    <div className="grid grid-cols-2 text-gray-500 py-4 px-5 hover:bg-gray-900 rounded-lg cursor-pointer">
+    <div
+      className="grid grid-cols-2 text-gray-500 py-2 px-3 hover:bg-gray-900 rounded-lg cursor-pointer"
+      onClick={playSong}
+    >
       <div className="flex items-center space-x-4">
         <p>{order}</p>
         <img
